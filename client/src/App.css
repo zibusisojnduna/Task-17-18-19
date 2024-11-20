@@ -1,0 +1,23 @@
+/* src/style.css */
+.App {
+  text-align: center;
+}
+
+.employee-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.employee-card {
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.employee-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
