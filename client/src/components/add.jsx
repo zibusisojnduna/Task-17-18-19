@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addEmployee } from "";
+import { addEmployee } from "../services/employeeService.js";
 
 function Add() {
     const  [employeeData, setEmployeeData] = useState ({
