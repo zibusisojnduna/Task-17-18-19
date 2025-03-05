@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { addEmployee } from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { getEmployee, updateEmployee } from '../services/api';
 
-const AddEmployee = () => {
+const EditEmployee = () => {
+  const { id } = useParams(); // Get the employee ID from the URL
   const [employeeData, setEmployeeData] = useState({
     name: '',
     surname: '',
@@ -12,6 +13,19 @@ const AddEmployee = () => {
   });
   const [photo, setPhoto] = useState(null);
   const history = useHistory();
+
+  useEffect(() => {
+    const fetchEmployee = async () => {
+      try {
+        const response = await getEmployee(id);
+        setEmployeeData(response.data);
+      } catch (error) {
+        console.error('Error fetching employee:', error);
+      }
+    };
+
+    fetchEmployee();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,16 +39,16 @@ const AddEmployee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addEmployee(employeeData, photo);
-      history.push('/');  // Redirect to the employee list page
+      await updateEmployee(id, employeeData);
+      history.push('/');  // Redirect to employee list
     } catch (error) {
-      console.error('Error adding employee:', error);
+      console.error('Error updating employee:', error);
     }
   };
 
   return (
     <div>
-      <h1>Add Employee</h1>
+      <h1>Edit Employee</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -79,12 +93,11 @@ const AddEmployee = () => {
         <input
           type="file"
           onChange={handlePhotoChange}
-          required
         />
-        <button type="submit">Add Employee</button>
+        <button type="submit">Update Employee</button>
       </form>
     </div>
   );
 };
 
-export default AddEmployee;
+export default EditEmployee;

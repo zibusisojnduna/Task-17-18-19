@@ -1,17 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Add from "./components/add";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import EmployeeList from './components/employeeList';
+import AddEmployee from './components/add';
+import EditEmployee from './components/edit';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <Add/>
-    </>
-  )
-}
+    <Router>
+      <Switch>
+        <Route exact path="/" component={EmployeeList} />
+        <Route path="/add" component={AddEmployee} />
+        <Route path="/edit/:id" component={EditEmployee} />
+      </Switch>
+    </Router>
+  );
+};
 
-export default App
+export default App;
