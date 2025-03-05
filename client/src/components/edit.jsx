@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getEmployee, updateEmployee } from '../services/api';
 
 const EditEmployee = () => {
-  const { id } = useParams(); // Get the employee ID from the URL
+  const { id } = useParams(); 
   const [employeeData, setEmployeeData] = useState({
     name: '',
     surname: '',
@@ -12,7 +12,7 @@ const EditEmployee = () => {
     role: '',
   });
   const [photo, setPhoto] = useState(null);
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     const fetchEmployee = async () => {

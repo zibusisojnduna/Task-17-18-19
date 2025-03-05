@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addEmployee } from '../services/api';
 
 const AddEmployee = () => {
@@ -11,7 +11,7 @@ const AddEmployee = () => {
     role: '',
   });
   const [photo, setPhoto] = useState(null);
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
